@@ -22,3 +22,4 @@ This project allows secure employee management with authentication, CRUD operati
 ## 🖥️ Frontend Preview (React + Vite)
 
 > Add your frontend images inside this folder:
+<img width="1919" height="979" alt="Screenshot 2025-12-10 164020" src="https://github.com/user-attachments/assets/d239b6b7-8a2c-45a8-8f68-a4bca7a9a79e" />
