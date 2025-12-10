@@ -1,58 +1,24 @@
-const API_BASE_URL = "https://localhost:7169/api";
+// src/api/employeeApi.js
+import API from "./authApi"; // 👈 reuse the same axios instance
 
 export async function fetchEmployees({ search = "", page = 1, pageSize = 5 }) {
-  const params = new URLSearchParams({
-    search,
-    page,
-    pageSize,
+  const res = await API.get("/Employees", {
+    params: { search, page, pageSize },
   });
 
-  const res = await fetch(`${API_BASE_URL}/Employees?${params.toString()}`);
-  if (!res.ok) {
-    throw new Error("Failed to fetch employees");
-  }
-  return res.json(); // { data, page, pageSize, totalCount }
+  // API returns { data, page, pageSize, totalCount }
+  return res.data;
 }
 
 export async function createEmployee(employee) {
-  const res = await fetch(`${API_BASE_URL}/Employees`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(employee),
-  });
-
-  if (!res.ok) {
-    const errorText = await res.text();
-    throw new Error(errorText || "Failed to create employee");
-  }
-
-  return res.json();
+  const res = await API.post("/Employees", employee);
+  return res.data;
 }
 
 export async function updateEmployee(id, employee) {
-  const res = await fetch(`${API_BASE_URL}/Employees/${id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(employee),
-  });
-
-  if (!res.ok) {
-    const errorText = await res.text();
-    throw new Error(errorText || "Failed to update employee");
-  }
+  await API.put(`/Employees/${id}`, employee);
 }
 
 export async function deleteEmployee(id) {
-  const res = await fetch(`${API_BASE_URL}/Employees/${id}`, {
-    method: "DELETE",
-  });
-
-  if (!res.ok) {
-    const errorText = await res.text();
-    throw new Error(errorText || "Failed to delete employee");
-  }
+  await API.delete(`/Employees/${id}`);
 }

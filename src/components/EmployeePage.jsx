@@ -174,8 +174,11 @@ function EmployeePage() {
 
       <div className="mt-2">
         {/* Header */}
-        <div className="d-flex justify-content-between mb-3">
-          <h4>👤 Employee Management</h4>
+        <div className="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <h5 className="mb-0">Employee List</h5>
+            <small className="text-muted">Add, edit and remove employees</small>
+          </div>
           <button
             className="btn btn-primary btn-sm"
             onClick={() => {
